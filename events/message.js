@@ -1,24 +1,17 @@
 const fs = require("fs");
 
-let commandObj = {};
-fs.readdir("./commands", (err, files) => {
-  files.forEach(file => {
-    let commandFunc = require(`../commands/${file}`);
-    let commandName = file.split(".")[0];
-
-    commandObj[commandName] = commandFunc;
-  });
-});
-
 module.exports = (client, ...args) => {
-  let [Message] = args;
+  const [message] = args;
+  const commandCurrent = message.content.split(" ")[0];
+  const prefix = commandCurrent.substring(0, 1);
+  const commandWord = commandCurrent.substring(1);
 
-  let commandCurrent = Message.content.split(" ")[0];
-
-  if (commandCurrent.substring(0, 1) == "!") {
+  if (prefix == "!") {
     try {
-      commandObj[commandCurrent.substring(1)](client, Message, ...args);
+      let commandFunc = require(`../commands/${commandWord}/${commandWord}.js`);
+      commandFunc(client, message, ...args);
     } catch (error) {
+      message.reply(`Sorry, that is not a recognized command.`);
       console.log(`Error from message.js catch block: ${error}`);
     }
   }

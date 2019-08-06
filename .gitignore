@@ -10,3 +10,6 @@ yarn-error.log*
 
 # eslint cache
 .eslintcache
+
+# .env file
+.env
