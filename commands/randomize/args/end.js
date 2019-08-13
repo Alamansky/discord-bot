@@ -1,4 +1,4 @@
-const pAlphabet = require("../../data/phoenetic-alphabet");
+const pAlphabet = require("../../../data/phoenetic-alphabet");
 
 module.exports = (server, generalChannel) => {
   server.channels.some(channel => {

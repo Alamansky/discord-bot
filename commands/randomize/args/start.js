@@ -1,7 +1,8 @@
-const pAlphabet = require("../../data/phoenetic-alphabet");
-const shuffle = require("../../util/shuffle");
-const maketChannels = require("../../util/makeChannels");
-const userError = require("./userError");
+const pAlphabet = require("../../../data/phoenetic-alphabet");
+const shuffle = require("../../../util/shuffle");
+const maketChannels = require("../../../util/makeChannels");
+
+let userError = `Invalid input. Type \`randomize help\` to see instructions;
 
 module.exports = async (client, msg, server, generalChannel, args) => {
   // init variables
@@ -34,12 +35,14 @@ module.exports = async (client, msg, server, generalChannel, args) => {
 
     teamChannels = await maketChannels(server, teams.length, "voice");
 
-    teams.forEach((team, index) =>
+    teams.forEach((team, index) => {
       team.forEach(member => {
         member.setVoiceChannel(teamChannels[index]);
         generalChannel.send(`${member} joined team ${pAlphabet[index]}`);
-      })
-    );
+      });
+      teamChannels[index].setUserLimit(team.length);
+    });
+
     return generalChannel.send(`${teams.length} voice channels created`);
   }
 };

@@ -1,6 +1,6 @@
-const randomize = require("./randomize");
-const endgame = require("./endgame");
-const instructions = require("./instructions");
+const start = require("./args/start");
+const end = require("./args/end");
+const help = require("./args/help");
 
 module.exports = (client, msg) => {
   // init variables
@@ -10,14 +10,14 @@ module.exports = (client, msg) => {
   const keyword = args[1];
 
   switch (keyword) {
-    case "endgame":
-      endgame(server, generalChannel);
+    case "end":
+      end(server, generalChannel);
       break;
-    case "randomize":
-      randomize(client, msg, server, generalChannel, args);
+    case "start":
+      start(client, msg, server, generalChannel, args);
       break;
-    case "instructions":
-      instructions(client, msg);
+    case "help":
+      help(client, msg);
       break;
     default:
       msg.reply(`Sorry, your argument(s) for this command are/were invalid.`);
