@@ -2,7 +2,7 @@ const pAlphabet = require("../../../data/phoenetic-alphabet");
 const shuffle = require("../../../util/shuffle");
 const maketChannels = require("../../../util/makeChannels");
 
-let userError = `Invalid input. Type \`randomize help\` to see instructions;
+let userError = `Invalid input. Type \`randomize help\` to see instructions`;
 
 module.exports = async (client, msg, server, generalChannel, args) => {
   // init variables
