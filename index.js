@@ -29,7 +29,6 @@ const assignEventHandlers = (err, files) => {
 client.login(process.env.BOT_TOKEN);
 
 // Dummy server so that Heroku doesn't crash while running the bot
-
 const http = require("http");
 const port = process.env.PORT || 3000;
 
@@ -38,6 +37,11 @@ const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.end("<h1>A Discord Bot Lives Here</h1>");
 });
+
+// timeout will ping bot every 20 mins to keep the heroku dyno awake
+setInterval(function() {
+  http.get("https://discord-botticelli.herokuapp.com/");
+}, 1200000);
 
 server.listen(port, () => {
   console.log(`Server running at port ` + port);
