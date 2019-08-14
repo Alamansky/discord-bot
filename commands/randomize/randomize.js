@@ -1,3 +1,4 @@
+const create = require("./args/create");
 const start = require("./args/start");
 const end = require("./args/end");
 const help = require("./args/help");
@@ -10,6 +11,9 @@ module.exports = (client, msg) => {
   const keyword = args[1];
 
   switch (keyword) {
+    case "create":
+      create(client, msg, server, generalChannel, args);
+      break;
     case "end":
       end(server, generalChannel);
       break;
