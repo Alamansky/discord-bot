@@ -1,4 +1,5 @@
-const create = require("./args/create");
+const createLobby = require("./args/createLobby");
+const removeLobby = require("./args/removeLobby");
 const start = require("./args/start");
 const end = require("./args/end");
 const help = require("./args/help");
@@ -11,13 +12,16 @@ module.exports = (client, msg) => {
   const keyword = args[1];
 
   switch (keyword) {
-    case "create":
-      create(client, msg, server, generalChannel, args);
+    case "create-lobby":
+      createLobby(server, generalChannel);
       break;
-    case "end":
+    case "remove-lobby":
+      removeLobby(server, generalChannel);
+      break;
+    case "end-game":
       end(server, generalChannel);
       break;
-    case "start":
+    case "start-game":
       start(client, msg, server, generalChannel, args);
       break;
     case "help":
